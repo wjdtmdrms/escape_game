@@ -110,23 +110,23 @@ impl Game{
 
     fn press(&mut self, btn : Button){
         match btn{
-            Button::Keyboard(Key::Space) => {
+            Button::Keyboard(Key::LCtrl) => {
+                println!("PRESS : LCtrl");
                 if self.does_spacekey_released{
-                    println!("PRESS : Space");
                     self.does_spacekey_released = false;
                     self.runner.initiate_jump();
                 }
             }
             Button::Keyboard(Key::Right) => {
+                println!("PRESS : Right");
                 if self.runner.get_accelerating_direction() != 1.0 && self.runner.get_press_count() != 2{
-                    println!("PRESS : Right");
                     self.runner.increase_press_count();
                     self.runner.set_accelerating_direction(1.0);
                 }
             }
             Button::Keyboard(Key::Left) => {
+                println!("PRESS : Left");
                 if self.runner.get_accelerating_direction() != -1.0 && self.runner.get_press_count() != 2{
-                    println!("PRESS : Left");
                     self.runner.increase_press_count();
                     self.runner.set_accelerating_direction(-1.0);
                 }
@@ -139,7 +139,7 @@ impl Game{
 
     fn release(&mut self, btn : Button){
         match btn{
-            Button::Keyboard(Key::Space) => {
+            Button::Keyboard(Key::LCtrl) => {
                 if !self.does_spacekey_released{
                     println!("Release : Space");
                     self.does_spacekey_released = true;

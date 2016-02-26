@@ -123,8 +123,8 @@ pub struct Runner{
     jump_seq : i32, // for jump_animation.
     lie_down_seq : i32, // for lie_down_animation.
     press_count : i32,
-    accelerating_direction : f64,
-    relative_speed : f64,
+    accel_direction : f64,
+    accel_rate : f64,
 }
 
 impl Runner{
@@ -144,8 +144,8 @@ impl Runner{
             jump_seq : 0,
             lie_down_seq : 0,
             press_count : 0,
-            accelerating_direction : 0.0,
-            relative_speed : 2.5,
+            accel_direction : 0.0,
+            accel_rate : 5.0,
         }
     }
 
@@ -176,7 +176,7 @@ impl Runner{
 	pub fn animate_jump(&mut self){
         let mut dt_y : f64 = 0.0;
         let quotient : i32 = self.jump_seq / self.jump_interval;
-        let mut cofficient : f64 = 1.0;
+       let mut cofficient : f64 = 1.0;
 
         if self.jump_seq >= 0 && self.jump_seq < self.jump_interval{
             return;
@@ -197,7 +197,7 @@ impl Runner{
         self.mod_xy(0.0, dt_y);
         self.jump_seq += 1;
 	}
-
+/*
     pub fn get_press_count(&self) -> i32{
         self.press_count
     }
@@ -210,28 +210,44 @@ impl Runner{
         self.press_count -= 1;
     }
 
-    pub fn get_accelerating_direction(&self) -> f64{
-        self.accelerating_direction
+    pub fn get_accel_direction(&self) -> f64{
+        self.accel_direction
     }
 
-    pub fn set_accelerating_direction(&mut self, dir : f64){
+    pub fn set_accel_direction(&mut self, dir : f64){
         println!("Acc_Dir : {}", dir);
-        self.accelerating_direction = dir;
+        self.accel_direction = dir;
+    }
+*/
+    pub fn define_accel_direction(&mut self, dir : f64){
+        if dir == 1.0 || dir == -1.0 {
+            if self.accel_direction != dir && self.press_count < 2 {
+                self.accel_direction = dir;
+                self.press_count += 1;
+            }
+        }
+        else{
+            println!(" {} ", dir * self.accel_direction);
+            if dir * self.accel_direction > 0.0 {
+                if self.press_count == 2 {
+                    self.accel_direction *= -1.0;
+                }
+                else {
+                    self.accel_direction = 0.0;
+                }
+            }
+            self.press_count -= 1;
+        }
+        println!("Press Count : {}, Accel Dir : {}", self.press_count, self.accel_direction);
     }
 
-    pub fn animate_moving(&mut self, standard_speed : f64){
-        let mut runner_speed : f64 = self.relative_speed;
-        if self.accelerating_direction == -1.0{
-            runner_speed += standard_speed;
-        }
-        
-        let dt_x : f64 = self.accelerating_direction * runner_speed;
-        let next_x : f64 = self.render_info[0] + dt_x;
+    pub fn animate_moving(&mut self){
+        let dt_x : f64 = self.accel_rate * self.accel_direction;
+        let next_x = self.render_info[0] + dt_x;
         if dt_x != 0.0 && next_x >= 0.0 && next_x <= (ui_manage::WINDOW_SIZE[0] as f64) - 1.5*self.render_info[2]{
-            self.mod_xy(dt_x, 0.0);
+        self.mod_xy(dt_x, 0.0);
         }
     }
-
 
     fn lie_down(&self){
 

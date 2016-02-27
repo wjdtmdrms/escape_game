@@ -3,7 +3,7 @@ extern crate graphics;
 
 extern crate opengl_graphics;
 
-use opengl_graphics::{ GlGraphics, OpenGL, Texture };
+use opengl_graphics::{ GlGraphics, Texture };
 use self::graphics::*;
 use std::path::Path;
 

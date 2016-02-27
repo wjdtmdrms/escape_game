@@ -5,7 +5,7 @@ extern crate opengl_graphics;
 // math related extern crates.
 extern crate rand;
 
-use opengl_graphics::{ GlGraphics, OpenGL, Texture };
+use opengl_graphics::{ GlGraphics, Texture };
 use self::graphics::*;
 use std::path::Path;
 //

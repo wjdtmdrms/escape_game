@@ -3,11 +3,11 @@ extern crate graphics;
 extern crate opengl_graphics;
 extern crate rand;
 
-use opengl_graphics::{ GlGraphics, OpenGL, Texture };
+use opengl_graphics::{ GlGraphics, Texture };
 use self::graphics::*;
 use std::path::Path;
 use self::rand::Rng;
-use super::configure;
+use super::configure::CONTEXT;
 // Objects
 
 enum ObjectType {
@@ -28,10 +28,10 @@ impl ObjectType {
 
 fn get_type(dice: i32) -> ObjectType {
     match dice {
-        0...13 => ObjectType::Ore,
+        0...13  => ObjectType::Ore,
         14...18 => ObjectType::Asteroid,
-        19 => ObjectType::Star,
-        _ => ObjectType::Ore,
+        19      => ObjectType::Star,
+        _       => ObjectType::Ore,
     }
 }
 
@@ -59,7 +59,7 @@ impl Object {
         let dice: i32 = rand::thread_rng().gen_range(0, 20);
         let object_type = get_type(dice);
         let height: f64 = rand::thread_rng().gen_range(144, 515) as f64;
-        let initial_render_info: [f64; 4] = [1280.0, height, 50.0, 50.0];
+        let initial_render_info: [f64; 4] = [1280.0, height, CONTEXT.object_width, 50.0];
         let img_texture = object_type.get_texture();
 
         Object {

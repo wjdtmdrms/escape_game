@@ -41,14 +41,14 @@ fn main() {
     let mut game = Game::new(opengl);
     
     let mut events = window.events();
-    while let Some(e) = events.next(&mut window){
-        if let Some(ren) = e.render_args(){
+    while let Some(e) = events.next(&mut window) {
+        if let Some(ren) = e.render_args() {
             game.render(&ren);
-        } else if let Some(upd) = e.update_args(){
+        } else if let Some(upd) = e.update_args() {
             game.update(&upd);
-        } else if let Some(prs) = e.press_args(){
+        } else if let Some(prs) = e.press_args() {
             game.press(input_manage::press_identifier(prs));
-        } else if let Some(rls) = e.release_args(){
+        } else if let Some(rls) = e.release_args() {
             game.release(input_manage::release_identifier(rls));
         }
     }

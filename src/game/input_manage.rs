@@ -5,7 +5,7 @@ extern crate piston;
 
 use piston::input::*;
 
-pub enum KeyResult{
+pub enum KeyResult {
     None,
     // control
     Jump,
@@ -23,47 +23,47 @@ pub enum KeyResult{
     Home,
 }
 
-pub fn press_identifier(btn : Button) -> KeyResult {
-    match btn{
+pub fn press_identifier(btn: Button) -> KeyResult {
+    match btn {
         Button::Keyboard(Key::LCtrl) => {
-            println!("PRESS : LCtrl");
+            println!("PRESS: LCtrl");
             KeyResult::Jump
         }
         Button::Keyboard(Key::Left) => {
-            println!("PRESS : Left");
+            println!("PRESS: Left");
             KeyResult::MoveLeft
         }
         Button::Keyboard(Key::Right) => {
-            println!("PRESS : Right");
+            println!("PRESS: Right");
             KeyResult::MoveRight
         }
         Button::Keyboard(Key::Execute) => {
-            println!("PRESS : Enter");
+            println!("PRESS: Enter");
             KeyResult::NewGame
         }
         _ => {
-            println!("PRESS : Other key");
+            println!("PRESS: Other key");
             KeyResult::None
         }
     }
 }
 
-pub fn release_identifier(btn : Button) -> KeyResult {
-	match btn{
+pub fn release_identifier(btn: Button) -> KeyResult {
+    match btn {
         Button::Keyboard(Key::LCtrl) => {
-            println!("Release : LCtrl");
+            println!("Release: LCtrl");
             KeyResult::Jump
         }
-    	Button::Keyboard(Key::Left) => {
-			println!("Release : Left");
+        Button::Keyboard(Key::Left) => {
+            println!("Release: Left");
             KeyResult::MoveLeft
         }
         Button::Keyboard(Key::Right) => {
-            println!("Release : Right");
+            println!("Release: Right");
             KeyResult::MoveRight
         }
         _ => {
-            println!("Rlease : Other Key");
+            println!("Rlease: Other Key");
             KeyResult::None
         }
     }

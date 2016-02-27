@@ -109,8 +109,8 @@ impl Game {
     pub fn update(&mut self, args: &UpdateArgs) {
         let move_distance = self.speed * args.dt;
         self.update_grounds(move_distance);
-        self.runner.animate(move_distance);
         self.update_objects(move_distance);
+        self.runner.animate(move_distance, args.dt);
     }
 
     pub fn press(&mut self, kr: input_manage::KeyResult) {

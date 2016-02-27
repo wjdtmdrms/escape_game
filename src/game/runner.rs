@@ -130,5 +130,9 @@ impl Runner{
     fn lie_down(&self){
 
     }
+
+    pub fn get_render_info(&self) -> [f64; 4] {
+        self.render_info
+    }
 }
 

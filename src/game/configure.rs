@@ -1,6 +1,7 @@
 pub struct Context {
     pub land_width: f64,
     pub object_width: f64,
+    pub max_jump_cnt: i32,
     pub runner_width: f64,
     pub runner_y_offset: f64,
     pub runner_jump_speed: f64,
@@ -10,6 +11,7 @@ pub struct Context {
 pub static CONTEXT: Context = Context {
     land_width: 128.0,
     object_width: 50.0,
+    max_jump_cnt: 2,
     runner_width: 157.0,
     runner_y_offset: 465.0,
     runner_jump_speed: -450.0,

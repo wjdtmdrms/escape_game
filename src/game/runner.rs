@@ -54,13 +54,8 @@ impl Runner {
         image.draw(&self.texture, default_draw_state(), c.transform.trans(self.render_info[0], self.render_info[1]), gl);
     } 
 
-    fn mod_xy(&mut self, dt_x: f64, dt_y: f64) {
-        self.render_info[0] += dt_x;
-        self.render_info[1] += dt_y;
-    }
-
     pub fn initiate_jump(&mut self) {
-        if self.jump_count < 2 {
+        if self.jump_count < CONTEXT.max_jump_cnt {
             self.jump_count += 1;
             self.y_speed = CONTEXT.runner_jump_speed;
         }
@@ -92,7 +87,8 @@ impl Runner {
         let dt_x: f64 = move_distance * self.accel_direction;
         let dt_y: f64 = self.y_speed * dt;
 
-        self.mod_xy(dt_x, dt_y);
+        self.render_info[0] += dt_x;
+        self.render_info[1] += dt_y;
 
         if self.jump_count > 0 {
             self.y_speed += CONTEXT.gravity_accel * dt;

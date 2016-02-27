@@ -64,21 +64,21 @@ impl Ground {
 
         let ground_type = get_type(dice);
 
-        let initial_render_info : [f64; 4] = [offset, 648.0, CONTEXT.land_width, 72.0];
+        let initial_render_info: [f64; 4] = [offset, 648.0, CONTEXT.land_width, 72.0];
         let img_texture = ground_type.get_texture();
         Ground {
-            render_info : initial_render_info,
-            g_type : ground_type,
-            texture : img_texture,
+            render_info: initial_render_info,
+            g_type: ground_type,
+            texture: img_texture,
         }
     }
 
-    pub fn mod_xy(&mut self, dt_x : f64, dt_y : f64) {
+    pub fn mod_xy(&mut self, dt_x: f64, dt_y: f64) {
         self.render_info[0] += dt_x;
         self.render_info[1] += dt_y;
     }
 
-    pub fn render(&self, c : Context, gl : &mut GlGraphics) {
+    pub fn render(&self, c: Context, gl: &mut GlGraphics) {
         let initial_render_info = [0.0, 0.0, self.render_info[2], self.render_info[3]];
         let image = Image::new().rect(initial_render_info);
         image.draw(&self.texture, default_draw_state(), c.transform.trans(self.render_info[0], self.render_info[1]), gl);

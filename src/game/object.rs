@@ -11,9 +11,9 @@ use super::configure;
 // Objects
 
 enum ObjectType {
-	Material { value : f64 },
-	Obstacle { damage : f64 },
-	Relic { name : String, price : f64 },
+	Material { value: f64 },
+	Obstacle { damage: f64 },
+	Relic { name: String, price: f64 },
 }
 
 enum MaterialPattern {
@@ -25,9 +25,9 @@ enum MaterialPattern {
 }
 
 pub struct Object {
-	render_info : [f64; 4],
-	obj_type : ObjectType,
-	is_chekced : bool,
+	render_info: [f64; 4],
+	obj_type: ObjectType,
+	is_chekced: bool,
 }
 
 impl Object {

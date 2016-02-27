@@ -25,23 +25,23 @@ use self::configure:: {
 };
 
 pub struct Game {
-    gl : GlGraphics,
-    speed : f64,
-    ground_q : Vec<Ground>, // further ground_queue.
-    runner : Runner,
-    //object : Object, // further object_queue.
-    does_spacekey_released : bool
+    gl: GlGraphics,
+    speed: f64,
+    ground_q: Vec<Ground>, // further ground_queue.
+    runner: Runner,
+    //object: Object, // further object_queue.
+    does_spacekey_released: bool
 }
 
 impl Game {
-    pub fn new(opengl : OpenGL) -> Game {
+    pub fn new(opengl: OpenGL) -> Game {
         let mut tmp_game = Game {
-            gl : GlGraphics::new(opengl),
-            speed : 500.0,
-            ground_q : vec![],
-            runner : Runner::new(),
+            gl: GlGraphics::new(opengl),
+            speed: 500.0,
+            ground_q: vec![],
+            runner: Runner::new(),
         
-            does_spacekey_released : true,
+            does_spacekey_released: true,
         };
 
         tmp_game
@@ -88,7 +88,7 @@ impl Game {
         self.runner.animate(move_distance);
     }
 
-    pub fn press(&mut self, kr : input_manage::KeyResult) {
+    pub fn press(&mut self, kr: input_manage::KeyResult) {
         match kr {
             input_manage::KeyResult::Jump => {
                 self.runner.initiate_jump();
@@ -105,7 +105,7 @@ impl Game {
         }
     }
 
-    pub fn release(&mut self, kr : input_manage::KeyResult) {
+    pub fn release(&mut self, kr: input_manage::KeyResult) {
         match kr {
             input_manage::KeyResult::Jump => {
                 // do nothing

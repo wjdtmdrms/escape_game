@@ -14,8 +14,8 @@ pub static CONTEXT: Context = Context {
     max_jump_cnt: 2,
     runner_width: 157.0,
     runner_y_offset: 465.0,
-    runner_jump_speed: -450.0,
-    gravity_accel: 500.0,
+    runner_jump_speed: -1000.0,
+    gravity_accel: 2500.0,
 };
 
 pub static WINDOW_NAME: &'static str = "Escape-Away";

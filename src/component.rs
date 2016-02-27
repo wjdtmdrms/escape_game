@@ -1,31 +1,14 @@
 
 //extern crate piston;
 extern crate graphics;
-
-//extern crate glutin_window;
 extern crate opengl_graphics;
 
-//use piston::window::WindowSettings;
-//use piston::event_loop::*;
-//use piston::input::*;
-//use glutin_window::GlutinWindow as Window;
-
 use opengl_graphics::{ GlGraphics, OpenGL, Texture };
-//use graphics::{ Image, clear, default_draw_state };
 use graphics::*;
 use std::path::Path;
 use game::configure;
 
-// Code containing structs and static variable values.
-
-pub static WHITE : [f32; 4] = [1.0, 1.0, 1.0, 1.0];
-pub static BROWN : [f32; 4] = [0.5, 0.25, 0.0, 1.0];
-pub static RED : [f32; 4] = [1.0, 0.0, 0.0, 1.0];
-pub static GREEN: [f32; 4] = [0.0, 1.0, 0.0, 1.0];
-pub static BLUE: [f32; 4] = [0.0, 0.0, 1.0, 1.0];
-
 // Ground
-
 fn xy_zero_vector(vec : [f64; 4]) -> [f64; 4]{
     [0.0, 0.0, vec[2], vec[3]]
 }

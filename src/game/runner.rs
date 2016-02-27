@@ -1,15 +1,12 @@
-
 extern crate graphics;
-
 extern crate opengl_graphics;
 
 use opengl_graphics::{ GlGraphics, Texture };
 use self::graphics::*;
 use std::path::Path;
+use super::configure::WINDOW_SIZE;
 
-use super::configure;
 // Runner
-
 pub struct Runner {
     render_info: [f64; 4],
     texture: Texture,
@@ -100,7 +97,7 @@ impl Runner {
         
         // x moving.
         let next_x = self.render_info[0] + dt_x;
-        if next_x < 0.0 || next_x > (configure::WINDOW_SIZE[0] as f64) - 1.5*self.render_info[2]{
+        if next_x < 0.0 || next_x > (WINDOW_SIZE[0] as f64) - 1.5*self.render_info[2]{
             dt_x = 0.0;
         }
         

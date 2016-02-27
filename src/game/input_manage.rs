@@ -1,6 +1,3 @@
-
-// Code containing input related functions.
-
 extern crate piston;
 
 use piston::input::*;

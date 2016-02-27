@@ -1,4 +1,3 @@
-
 extern crate graphics;
 extern crate opengl_graphics;
 extern crate rand;
@@ -8,8 +7,8 @@ use self::graphics::*;
 use std::path::Path;
 use self::rand::Rng;
 use super::configure::CONTEXT;
-// Objects
 
+// Objects
 enum ObjectType {
     Ore,
     Asteroid,

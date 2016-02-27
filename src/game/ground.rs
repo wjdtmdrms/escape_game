@@ -1,20 +1,14 @@
-
 extern crate graphics;
 extern crate opengl_graphics;
-
-// math related extern crates.
 extern crate rand;
 
 use opengl_graphics::{ GlGraphics, Texture };
 use self::graphics::*;
 use std::path::Path;
-//
-// math related uses.
 use self::rand::Rng;
-
 use super::configure::CONTEXT;
-// Ground
 
+// Ground
 enum GroundPattern {
 
 }

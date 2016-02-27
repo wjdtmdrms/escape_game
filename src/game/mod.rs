@@ -1,16 +1,12 @@
-
-// graphic related extern crates.
 extern crate graphics;
 extern crate opengl_graphics;
 extern crate rand;
 
-// graphic related uses.
 use piston::input::*;
 use opengl_graphics::{ GlGraphics, OpenGL };
 use self::graphics::*;
 use self::rand::Rng;
 
-// mod uses.
 pub mod configure;
 pub mod input_manage;
 

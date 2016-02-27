@@ -24,7 +24,7 @@ use self::configure:: {
     WINDOW_SIZE,
 };
 
-pub struct Game{
+pub struct Game {
     gl : GlGraphics,
     speed : f64,
     ground_q : Vec<Ground>, // further ground_queue.
@@ -33,9 +33,9 @@ pub struct Game{
     does_spacekey_released : bool
 }
 
-impl Game{
-    pub fn new(opengl : OpenGL) -> Game{
-        let mut tmp_game = Game{
+impl Game {
+    pub fn new(opengl : OpenGL) -> Game {
+        let mut tmp_game = Game {
             gl : GlGraphics::new(opengl),
             speed : 500.0,
             ground_q : vec![],
@@ -54,7 +54,7 @@ impl Game{
         self.gl.draw(args.viewport(), |c, gl|{
             clear(configure::WHITE, gl);
             tmp_runner.render(c, gl);
-            for g in tmp_ground_q{
+            for g in tmp_ground_q {
                 g.render(c, gl);
             }
         })
@@ -89,7 +89,7 @@ impl Game{
     }
 
     pub fn press(&mut self, kr : input_manage::KeyResult) {
-        match kr{
+        match kr {
             input_manage::KeyResult::Jump => {
                 self.runner.initiate_jump();
             }
@@ -106,7 +106,7 @@ impl Game{
     }
 
     pub fn release(&mut self, kr : input_manage::KeyResult) {
-        match kr{
+        match kr {
             input_manage::KeyResult::Jump => {
                 // do nothing
             }

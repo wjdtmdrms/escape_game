@@ -5,7 +5,7 @@ extern crate piston;
 
 use piston::input::*;
 
-pub enum KeyResult{
+pub enum KeyResult {
     None,
     // control
     Jump,
@@ -24,7 +24,7 @@ pub enum KeyResult{
 }
 
 pub fn press_identifier(btn : Button) -> KeyResult {
-    match btn{
+    match btn {
         Button::Keyboard(Key::LCtrl) => {
             println!("PRESS : LCtrl");
             KeyResult::Jump
@@ -49,7 +49,7 @@ pub fn press_identifier(btn : Button) -> KeyResult {
 }
 
 pub fn release_identifier(btn : Button) -> KeyResult {
-	match btn{
+	match btn {
         Button::Keyboard(Key::LCtrl) => {
             println!("Release : LCtrl");
             KeyResult::Jump

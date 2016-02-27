@@ -10,7 +10,7 @@ use std::path::Path;
 use super::configure;
 // Runner
 
-pub struct Runner{
+pub struct Runner {
     render_info : [f64; 4],
     texture : Texture,
     fuel_accumulation_max : f64,
@@ -28,9 +28,9 @@ pub struct Runner{
     accel_direction : f64,
 }
 
-impl Runner{
-    pub fn new() -> Runner{
-        Runner{
+impl Runner {
+    pub fn new() -> Runner {
+        Runner {
             render_info : [144.0, 465.0, 157.0, 183.0],
             texture : Texture::from_path(Path::new("pic/daram.jpg")).unwrap(),
             fuel_accumulation_max : 0.0,
@@ -61,11 +61,11 @@ impl Runner{
     }
 
     pub fn initiate_jump(&mut self){
-        if self.jump_seq == 0{
-            if self.jump_count == 0{
+        if self.jump_seq == 0 {
+            if self.jump_count == 0 {
                 self.jump_seq = self.jump_interval;
             }
-            else if self.jump_count == 2{
+            else if self.jump_count == 2 {
             // do nothing yet.
             }
         }
@@ -78,7 +78,7 @@ impl Runner{
                 self.press_count += 1;
             }
         }
-        else{
+        else {
             if dir * self.accel_direction > 0.0 {
                 if self.press_count == 2 {
                     self.accel_direction *= -1.0;
@@ -105,18 +105,18 @@ impl Runner{
         }
         
         // y moving.
-        if self.jump_seq == 8 * self.jump_interval{
+        if self.jump_seq == 8 * self.jump_interval {
             self.jump_seq = 0;
         }
-        else{
-            if self.jump_seq >= 0 && self.jump_seq < self.jump_interval{
+        else {
+            if self.jump_seq >= 0 && self.jump_seq < self.jump_interval {
                 cofficient = 0.0;
             }
-            else{
-                if quotient < 4{
+            else {
+                if quotient < 4 {
                     cofficient = (4 - (quotient % 4)) as f64 * -1.0;
                 }
-                else{
+                else {
                     cofficient = (quotient % 4) as f64;
                 }
                 self.jump_seq += 1;

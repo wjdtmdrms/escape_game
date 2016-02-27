@@ -15,11 +15,11 @@ use self::rand::Rng;
 use super::configure::CONTEXT;
 // Ground
 
-enum GroundPattern{
+enum GroundPattern {
 
 }
 
-enum GroundType{
+enum GroundType {
     Normal,
     Trap,
     Pit,
@@ -52,21 +52,21 @@ fn get_type(dice: i32) -> GroundType {
     }
 }
 
-pub struct Ground{
+pub struct Ground {
     render_info: [f64; 4],
     g_type: GroundType,
     texture: Texture,
 }
 
-impl Ground{
-    pub fn new(offset: f64) -> Ground{
+impl Ground {
+    pub fn new(offset: f64) -> Ground {
         let dice: i32 = rand::thread_rng().gen_range(0, 20);
 
         let ground_type = get_type(dice);
 
         let initial_render_info : [f64; 4] = [offset, 648.0, CONTEXT.land_width, 72.0];
         let img_texture = ground_type.get_texture();
-        Ground{
+        Ground {
             render_info : initial_render_info,
             g_type : ground_type,
             texture : img_texture,

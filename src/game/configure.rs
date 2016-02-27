@@ -1,3 +1,11 @@
+pub struct Context {
+    pub land_width: f64,
+
+}
+
+pub static CONTEXT: Context = Context {
+    land_width: 128.0,
+};
 
 pub static WINDOW_NAME : &'static str = "Escape-Away";
 pub static WINDOW_SIZE : [u32; 2] = [1280, 720];

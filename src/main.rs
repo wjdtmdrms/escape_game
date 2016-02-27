@@ -17,7 +17,10 @@ use opengl_graphics::{ GlGraphics, OpenGL };
 mod game;
 
 use game::Game;
-use game::configure;
+use game::configure::{
+    WINDOW_NAME,
+    WINDOW_SIZE,
+};
 use game::input_manage;
 
 // code begins.
@@ -27,8 +30,8 @@ fn main() {
     let opengl = OpenGL::V3_2;
 
     let mut window: Window = WindowSettings::new(
-            configure::WINDOW_NAME,
-            configure::WINDOW_SIZE
+            WINDOW_NAME,
+            WINDOW_SIZE
         )
         .opengl(opengl)
         .exit_on_esc(true)
@@ -41,17 +44,11 @@ fn main() {
     while let Some(e) = events.next(&mut window){
         if let Some(ren) = e.render_args(){
             game.render(&ren);
-        }
-
-        if let Some(upd) = e.update_args(){
+        } else if let Some(upd) = e.update_args(){
             game.update(&upd);
-        }
-
-        if let Some(prs) = e.press_args(){
+        } else if let Some(prs) = e.press_args(){
             game.press(input_manage::press_identifier(prs));
-        }
-
-        if let Some(rls) = e.release_args(){
+        } else if let Some(rls) = e.release_args(){
             game.release(input_manage::release_identifier(rls));
         }
     }

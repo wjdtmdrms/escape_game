@@ -14,7 +14,7 @@ use opengl_graphics::{ GlGraphics, OpenGL, Texture };
 //use graphics::{ Image, clear, default_draw_state };
 use graphics::*;
 use std::path::Path;
-use ui_manage;
+use game::configure;
 
 // Code containing structs and static variable values.
 
@@ -244,7 +244,7 @@ impl Runner{
     pub fn animate_moving(&mut self){
         let dt_x : f64 = self.accel_rate * self.accel_direction;
         let next_x = self.render_info[0] + dt_x;
-        if dt_x != 0.0 && next_x >= 0.0 && next_x <= (ui_manage::WINDOW_SIZE[0] as f64) - 1.5*self.render_info[2]{
+        if dt_x != 0.0 && next_x >= 0.0 && next_x <= (configure::WINDOW_SIZE[0] as f64) - 1.5*self.render_info[2]{
         self.mod_xy(dt_x, 0.0);
         }
     }

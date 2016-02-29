@@ -48,12 +48,12 @@ impl Game {
 
         self.gl.draw(args.viewport(), |c, gl|{
             clear(configure::WHITE, gl);
-            tmp_runner.render(c, gl);
+            tmp_runner.render(&c, gl);
             for g in tmp_ground_q {
-                g.render(c, gl);
+                g.render(&c, gl);
             }
             for o in tmp_object_q {
-                o.render(c, gl);
+                o.render(&c, gl);
             }
         })
     }

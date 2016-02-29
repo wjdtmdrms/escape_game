@@ -31,7 +31,7 @@ impl RenderInfo {
         }
     }
 
-    pub fn render(&self, c: Context, gl:&mut GlGraphics) {
+    pub fn render(&self, c: &Context, gl: &mut GlGraphics) {
         let initial_render_info = [0.0, 0.0, self.render_info[2], self.render_info[3]];
         let image = Image::new().rect(initial_render_info);
         image.draw(&self.texture, default_draw_state(), c.transform.trans(self.render_info[0], self.render_info[1]), gl);

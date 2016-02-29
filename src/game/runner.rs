@@ -44,7 +44,7 @@ impl Runner {
         }
     }
 
-    pub fn render(&self, c: Context, gl: &mut GlGraphics) {
+    pub fn render(&self, c: &Context, gl: &mut GlGraphics) {
         self.render_info.render(c, gl);
     } 
 

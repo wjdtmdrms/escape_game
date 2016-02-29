@@ -42,9 +42,9 @@ impl Game {
     }
 
     pub fn render(&mut self, args: &RenderArgs) {
-        let tmp_ground_q = &mut self.ground_q;
-        let tmp_runner = &mut self.runner;
-        let tmp_object_q = &mut self.object_q;
+        let tmp_ground_q = &self.ground_q;
+        let tmp_runner = &self.runner;
+        let tmp_object_q = &self.object_q;
 
         self.gl.draw(args.viewport(), |c, gl|{
             clear(configure::WHITE, gl);

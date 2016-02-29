@@ -1,7 +1,6 @@
-use opengl_graphics::{ GlGraphics, Texture };
+use opengl_graphics::{ GlGraphics };
 use graphics::*;
 use rand::{ Rng, thread_rng };
-use std::path::Path;
 use game::configure::{ CONTEXT, WINDOW_SIZE };
 use game::render_info::{ RenderInfo, is_crashed };
 
@@ -13,11 +12,11 @@ enum ObjectType {
 }
 
 impl ObjectType {
-    fn get_texture(&self) -> Texture {
+    fn get_texture(&self) -> &str {
         match *self {
-            ObjectType::Ore => Texture::from_path(Path::new("pic/ore.jpg")).unwrap(),
-            ObjectType::Asteroid => Texture::from_path(Path::new("pic/asteroid.jpg")).unwrap(),
-            ObjectType::Star => Texture::from_path(Path::new("pic/star.jpg")).unwrap(),
+            ObjectType::Ore         => "pic/ore.jpg",
+            ObjectType::Asteroid    => "pic/asteroid.jpg",
+            ObjectType::Star        => "pic/star.jpg",
         }
     }
 }

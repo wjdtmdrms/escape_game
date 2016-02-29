@@ -1,7 +1,6 @@
-use opengl_graphics::{ GlGraphics, Texture };
+use opengl_graphics::{ GlGraphics };
 use graphics::*;
 use rand::{ Rng, thread_rng };
-use std::path::Path;
 use game::configure::CONTEXT;
 use game::render_info::RenderInfo;
 
@@ -19,17 +18,17 @@ enum GroundType {
 impl GroundType {
     fn get_height(&self) -> f64 {
         match *self {
-            GroundType::Normal => 72.0,
-            GroundType::Trap => 72.0,
-            GroundType::Pit => 72.0,
+            GroundType::Normal  => 72.0,
+            GroundType::Trap    => 72.0,
+            GroundType::Pit     => 72.0,
         }
     }
 
-    fn get_texture(&self) -> Texture {
+    fn get_texture(&self) -> &str {
         match *self {
-            GroundType::Normal => Texture::from_path(Path::new("pic/ground.jpg")).unwrap(),
-            GroundType::Trap => Texture::from_path(Path::new("pic/trap.jpg")).unwrap(),
-            GroundType::Pit => Texture::from_path(Path::new("pic/pit.jpg")).unwrap(),
+            GroundType::Normal  => "pic/ground.jpg",
+            GroundType::Trap    => "pic/trap.jpg",
+            GroundType::Pit     => "pic/pit.jpg",
         }
     }
 }

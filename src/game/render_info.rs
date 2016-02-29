@@ -1,3 +1,4 @@
+use std::path::Path;
 use opengl_graphics::{ GlGraphics, Texture };
 use graphics::*;
 
@@ -24,10 +25,10 @@ impl RenderInfo {
     // }
     // }
 
-    pub fn new(ren_info: [f64; 4], tx: Texture) -> RenderInfo {
+    pub fn new(ren_info: [f64; 4], tx: &str) -> RenderInfo {
         RenderInfo {
             render_info: ren_info,
-            texture: tx,
+            texture: Texture::from_path(Path::new(tx)).unwrap(),
         }
     }
 

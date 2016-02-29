@@ -1,6 +1,5 @@
-use opengl_graphics::{ GlGraphics, Texture };
+use opengl_graphics::{ GlGraphics };
 use graphics::*;
-use std::path::Path;
 use game::configure::{ CONTEXT, WINDOW_SIZE };
 use game::render_info::RenderInfo;
 
@@ -29,7 +28,7 @@ pub struct Runner {
 impl Runner {
     pub fn new() -> Runner {
         Runner {
-            render_info: RenderInfo::new([CONTEXT.runner_init_x, CONTEXT.runner_init_y, CONTEXT.runner_width, CONTEXT.runner_height], Texture::from_path(Path::new("pic/daram.jpg")).unwrap()),
+            render_info: RenderInfo::new([CONTEXT.runner_init_x, CONTEXT.runner_init_y, CONTEXT.runner_width, CONTEXT.runner_height], "pic/daram.jpg"),
             fuel_accumulation_max: 0.0,
             fuel_accumulation_now: 0.0,
             fuel_consumption: 0.0,

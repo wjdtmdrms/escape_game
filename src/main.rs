@@ -1,17 +1,14 @@
-
-// graphic related extern crates.
 extern crate piston;
-//extern crate graphics;
 extern crate glutin_window;
 extern crate opengl_graphics;
+extern crate graphics;
+extern crate rand;
 
-// graphic related uses.
 use piston::window::WindowSettings;
 use piston::event_loop::*;
 use piston::input::*;
 use glutin_window::GlutinWindow as Window;
 use opengl_graphics::OpenGL;
-//use graphics::*;
 
 // mods.
 mod game;
@@ -24,7 +21,6 @@ use game::configure::{
 use game::input_manage;
 
 // code begins.
-
 fn main() {
     println!("Escape-Away Initiated !!");
     let opengl = OpenGL::V3_2;

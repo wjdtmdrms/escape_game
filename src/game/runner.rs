@@ -1,10 +1,7 @@
-extern crate graphics;
-extern crate opengl_graphics;
-
 use opengl_graphics::{ GlGraphics, Texture };
-use self::graphics::*;
+use graphics::*;
 use std::path::Path;
-use super::configure::{ CONTEXT, WINDOW_SIZE };
+use game::configure::{ CONTEXT, WINDOW_SIZE };
 
 // Runner
 pub struct Runner {

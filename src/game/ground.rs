@@ -1,12 +1,8 @@
-extern crate graphics;
-extern crate opengl_graphics;
-extern crate rand;
-
 use opengl_graphics::{ GlGraphics, Texture };
-use self::graphics::*;
+use graphics::*;
+use rand::{ Rng, thread_rng };
 use std::path::Path;
-use self::rand::Rng;
-use super::configure::CONTEXT;
+use game::configure::CONTEXT;
 
 // Ground
 enum GroundPattern {
@@ -54,7 +50,7 @@ pub struct Ground {
 
 impl Ground {
     pub fn new(offset: f64) -> Ground {
-        let dice: i32 = rand::thread_rng().gen_range(0, 20);
+        let dice: i32 = thread_rng().gen_range(0, 20);
 
         let ground_type = get_type(dice);
 

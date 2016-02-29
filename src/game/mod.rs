@@ -1,12 +1,3 @@
-extern crate graphics;
-extern crate opengl_graphics;
-extern crate rand;
-
-use piston::input::*;
-use opengl_graphics::{ GlGraphics, OpenGL };
-use self::graphics::*;
-use self::rand::Rng;
-
 pub mod configure;
 pub mod input_manage;
 
@@ -14,13 +5,18 @@ mod ground;
 mod runner;
 mod object;
 
-use self::ground::Ground;
-use self::runner::Runner;
-use self::object::Object;
-use self::configure:: {
+use piston::input::*;
+use opengl_graphics::{ GlGraphics, OpenGL };
+use graphics::*;
+use rand::{ Rng, thread_rng };
+
+use game::configure:: {
     CONTEXT,
     WINDOW_SIZE,
 };
+use game::ground::Ground;
+use game::runner::Runner;
+use game::object::Object;
 
 pub struct Game {
     gl: GlGraphics,
@@ -83,7 +79,7 @@ impl Game {
     }
 
     fn update_objects(&mut self, move_distance: f64) {
-        let dice: i32 = rand::thread_rng().gen_range(0, 6);
+        let dice: i32 = thread_rng().gen_range(0, 6);
         // move objects
         for obj in &mut self.object_q {
             obj.animate(move_distance);

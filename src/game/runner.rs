@@ -30,7 +30,7 @@ pub struct Runner {
 impl Runner {
     pub fn new() -> Runner {
         Runner {
-            render_info: RenderInfo::new([144.0, CONTEXT.runner_y_offset, CONTEXT.runner_width, 183.0]),
+            render_info: RenderInfo::new([CONTEXT.runner_init_x, CONTEXT.runner_init_y, CONTEXT.runner_width, CONTEXT.runner_height]),
             texture: Texture::from_path(Path::new("pic/daram.jpg")).unwrap(),
             fuel_accumulation_max: 0.0,
             fuel_accumulation_now: 0.0,

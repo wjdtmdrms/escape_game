@@ -2,7 +2,7 @@ use opengl_graphics::{ GlGraphics, Texture };
 use graphics::*;
 use rand::{ Rng, thread_rng };
 use std::path::Path;
-use game::configure::CONTEXT;
+use game::configure::{ CONTEXT, WINDOW_SIZE };
 use game::render_info::{ RenderInfo, is_crashed };
 
 // Objects
@@ -50,7 +50,7 @@ impl Object {
         let dice: i32 = thread_rng().gen_range(0, 20);
         let object_type = get_type(dice);
         let height: f64 = thread_rng().gen_range(144, 515) as f64;
-        let initial_render_info: RenderInfo = RenderInfo::new([1280.0, height, CONTEXT.object_width, 50.0]);
+        let initial_render_info: RenderInfo = RenderInfo::new([WINDOW_SIZE[0] as f64, height, CONTEXT.object_width, CONTEXT.object_height]);
         let img_texture = object_type.get_texture();
 
         Object {

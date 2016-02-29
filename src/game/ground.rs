@@ -55,7 +55,7 @@ impl Ground {
 
         let ground_type = get_type(dice);
 
-        let initial_render_info: RenderInfo = RenderInfo::new([offset, 648.0, CONTEXT.land_width, 72.0]);
+        let initial_render_info: RenderInfo = RenderInfo::new([offset, CONTEXT.land_init_y, CONTEXT.land_width, CONTEXT.land_height]);
         let img_texture = ground_type.get_texture();
         Ground {
             render_info: initial_render_info,

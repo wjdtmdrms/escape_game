@@ -1,21 +1,45 @@
 pub struct Context {
+    // global config
+    pub gravity_accel: f64,
+
+    // ground config
+    pub land_init_y: f64,
     pub land_width: f64,
+    pub land_height: f64,
+
+    // object config 
     pub object_width: f64,
+    pub object_height: f64,
+
+    // runner config
     pub max_jump_cnt: i32,
     pub runner_width: f64,
-    pub runner_y_offset: f64,
+    pub runner_height: f64,
+    pub runner_init_x: f64,
+    pub runner_init_y: f64,
     pub runner_jump_speed: f64,
-    pub gravity_accel: f64,
 }
 
 pub static CONTEXT: Context = Context {
+    // global config
+    gravity_accel: 2500.0,
+
+    // ground config
+    land_init_y: 648.0,
     land_width: 128.0,
+    land_height: 72.0,
+    
+    // object config 
     object_width: 50.0,
+    object_height: 50.0,
+
+    // runner config
     max_jump_cnt: 2,
     runner_width: 157.0,
-    runner_y_offset: 465.0,
+    runner_height: 183.0,
+    runner_init_x: 144.0,
+    runner_init_y: 465.0,
     runner_jump_speed: -1000.0,
-    gravity_accel: 2500.0,
 };
 
 pub static WINDOW_NAME: &'static str = "Escape-Away";

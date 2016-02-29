@@ -46,7 +46,6 @@ fn get_type(dice: i32) -> GroundType {
 pub struct Ground {
     render_info: RenderInfo,
     g_type: GroundType,
-    texture: Texture,
 }
 
 impl Ground {
@@ -55,17 +54,15 @@ impl Ground {
 
         let ground_type = get_type(dice);
 
-        let initial_render_info: RenderInfo = RenderInfo::new([offset, CONTEXT.land_init_y, CONTEXT.land_width, CONTEXT.land_height]);
-        let img_texture = ground_type.get_texture();
+        let initial_render_info: RenderInfo = RenderInfo::new([offset, CONTEXT.land_init_y, CONTEXT.land_width, CONTEXT.land_height], ground_type.get_texture());
         Ground {
             render_info: initial_render_info,
             g_type: ground_type,
-            texture: img_texture,
         }
     }
 
     pub fn render(&self, c: Context, gl: &mut GlGraphics) {
-        self.render_info.render(c, gl, &self.texture);
+        self.render_info.render(c, gl);
     }
 
     pub fn need_to_remove(&self) -> bool {

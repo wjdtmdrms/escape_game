@@ -42,7 +42,6 @@ enum MaterialPattern {
 pub struct Object {
     render_info: RenderInfo,
     obj_type: ObjectType,
-    texture: Texture,
 }
 
 impl Object {
@@ -50,18 +49,16 @@ impl Object {
         let dice: i32 = thread_rng().gen_range(0, 20);
         let object_type = get_type(dice);
         let height: f64 = thread_rng().gen_range(144, 515) as f64;
-        let initial_render_info: RenderInfo = RenderInfo::new([WINDOW_SIZE[0] as f64, height, CONTEXT.object_width, CONTEXT.object_height]);
-        let img_texture = object_type.get_texture();
+        let initial_render_info: RenderInfo = RenderInfo::new([WINDOW_SIZE[0] as f64, height, CONTEXT.object_width, CONTEXT.object_height], object_type.get_texture());
 
         Object {
             render_info: initial_render_info,
             obj_type: object_type,
-            texture: img_texture,
         }
     }
 
     pub fn render(&self, c: Context, gl: &mut GlGraphics) {
-        self.render_info.render(c, gl, &self.texture);
+        self.render_info.render(c, gl);
     }
 
     pub fn need_to_remove(&self, ri: &RenderInfo) -> bool {

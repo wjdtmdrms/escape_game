@@ -7,7 +7,6 @@ use game::render_info::RenderInfo;
 // Runner
 pub struct Runner {
     render_info: RenderInfo,
-    texture: Texture,
 
     // TODO: comment this
     fuel_accumulation_max: f64,
@@ -19,7 +18,7 @@ pub struct Runner {
     // TODO: comment this
     fusionable_material: f64,
 
-    jump_count: i32, // first jump? or seceond jump?
+    jump_count: i32,
     y_speed: f64, 
 
     lie_down_seq: i32, // for lie_down_animation.
@@ -30,8 +29,7 @@ pub struct Runner {
 impl Runner {
     pub fn new() -> Runner {
         Runner {
-            render_info: RenderInfo::new([CONTEXT.runner_init_x, CONTEXT.runner_init_y, CONTEXT.runner_width, CONTEXT.runner_height]),
-            texture: Texture::from_path(Path::new("pic/daram.jpg")).unwrap(),
+            render_info: RenderInfo::new([CONTEXT.runner_init_x, CONTEXT.runner_init_y, CONTEXT.runner_width, CONTEXT.runner_height], Texture::from_path(Path::new("pic/daram.jpg")).unwrap()),
             fuel_accumulation_max: 0.0,
             fuel_accumulation_now: 0.0,
             fuel_consumption: 0.0,
@@ -47,7 +45,7 @@ impl Runner {
     }
 
     pub fn render(&self, c: Context, gl: &mut GlGraphics) {
-        self.render_info.render(c, gl, &self.texture);
+        self.render_info.render(c, gl);
     } 
 
     pub fn initiate_jump(&mut self) {
@@ -78,7 +76,7 @@ impl Runner {
         //println!("Press Count: {}, Accel Dir: {}", self.press_count, self.accel_direction);
     }
 
-	pub fn animate(&mut self, move_distance: f64, dt: f64) {
+    pub fn animate(&mut self, move_distance: f64, dt: f64) {
         // x, y moving.
         let dt_x: f64 = move_distance * self.accel_direction;
         let dt_y: f64 = self.y_speed * dt;
@@ -92,14 +90,14 @@ impl Runner {
         let limit_min_x = 0.0;
         let limit_max_x = (WINDOW_SIZE[0] as f64) - 1.5*CONTEXT.runner_width;
         let limit_max_y = CONTEXT.runner_init_y;
-        
+
         self.render_info.limit_x(Some(limit_min_x), Some(limit_max_x));
 
         if self.render_info.limit_y(None, Some(limit_max_y)) {
             self.y_speed = 0.0;
             self.jump_count = 0;
         }
-	}
+    }
 
     fn lie_down(&self) {
 

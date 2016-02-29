@@ -28,7 +28,7 @@ pub static CONTEXT: Context = Context {
     land_init_y: 648.0,
     land_width: 128.0,
     land_height: 72.0,
-    
+
     // object config 
     object_width: 50.0,
     object_height: 50.0,

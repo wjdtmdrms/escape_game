@@ -9,11 +9,12 @@ pub fn is_crashed(it: &RenderInfo, other: &RenderInfo) -> bool {
 
     (it.is_include_x(o_x) || other.is_include_x(i_x))
         &&
-    (it.is_include_y(o_y) || other.is_include_y(i_y))
+        (it.is_include_y(o_y) || other.is_include_y(i_y))
 }
 
 pub struct RenderInfo {
     render_info: [f64; 4],
+    texture: Texture,
 }
 
 impl RenderInfo {
@@ -23,16 +24,17 @@ impl RenderInfo {
     // }
     // }
 
-    pub fn new(ren_info: [f64; 4]) -> RenderInfo {
+    pub fn new(ren_info: [f64; 4], tx: Texture) -> RenderInfo {
         RenderInfo {
-            render_info: ren_info.clone(),
+            render_info: ren_info,
+            texture: tx,
         }
     }
 
-    pub fn render(&self, c: Context, gl:&mut GlGraphics, tx: &Texture) {
+    pub fn render(&self, c: Context, gl:&mut GlGraphics) {
         let initial_render_info = [0.0, 0.0, self.render_info[2], self.render_info[3]];
         let image = Image::new().rect(initial_render_info);
-        image.draw(tx, default_draw_state(), c.transform.trans(self.render_info[0], self.render_info[1]), gl);
+        image.draw(&self.texture, default_draw_state(), c.transform.trans(self.render_info[0], self.render_info[1]), gl);
     }
 
     pub fn get_offset_x(&self) -> f64 {
@@ -46,11 +48,11 @@ impl RenderInfo {
     pub fn is_hidden_x(&self) -> bool {
         self.render_info[0] + self.render_info[2] < 0.0
     }
-    
+
     pub fn is_include_x(&self, x: f64) -> bool {
         self.render_info[0] <= x && x < self.render_info[0] + self.render_info[2]
     }
-    
+
     pub fn is_include_y(&self, y: f64) -> bool {
         self.render_info[1] <= y && y < self.render_info[1] + self.render_info[3]
     }

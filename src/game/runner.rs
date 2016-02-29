@@ -91,7 +91,7 @@ impl Runner {
 
         let limit_min_x = 0.0;
         let limit_max_x = (WINDOW_SIZE[0] as f64) - 1.5*CONTEXT.runner_width;
-        let limit_max_y = CONTEXT.runner_y_offset;
+        let limit_max_y = CONTEXT.runner_init_y;
         
         self.render_info.limit_x(Some(limit_min_x), Some(limit_max_x));
 

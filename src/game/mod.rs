@@ -4,6 +4,7 @@ pub mod input_manage;
 mod ground;
 mod runner;
 mod object;
+mod render_info;
 
 use piston::input::*;
 use opengl_graphics::{ GlGraphics, OpenGL };
@@ -17,6 +18,7 @@ use game::configure:: {
 use game::ground::Ground;
 use game::runner::Runner;
 use game::object::Object;
+use game::render_info::RenderInfo;
 
 pub struct Game {
     gl: GlGraphics,
@@ -86,7 +88,7 @@ impl Game {
         }
 
         // remove object
-        let runner_render_info: [f64; 4] = self.runner.get_render_info();
+        let runner_render_info: &RenderInfo = self.runner.get_render_info();
         self.object_q.retain(|ref obj| !obj.need_to_remove(runner_render_info));
 
         // get offset tiles

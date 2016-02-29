@@ -2,10 +2,11 @@ use opengl_graphics::{ GlGraphics, Texture };
 use graphics::*;
 use std::path::Path;
 use game::configure::{ CONTEXT, WINDOW_SIZE };
+use game::render_info::RenderInfo;
 
 // Runner
 pub struct Runner {
-    render_info: [f64; 4],
+    render_info: RenderInfo,
     texture: Texture,
 
     // TODO: comment this
@@ -29,7 +30,7 @@ pub struct Runner {
 impl Runner {
     pub fn new() -> Runner {
         Runner {
-            render_info: [144.0, CONTEXT.runner_y_offset, CONTEXT.runner_width, 183.0],
+            render_info: RenderInfo::new([144.0, CONTEXT.runner_y_offset, CONTEXT.runner_width, 183.0]),
             texture: Texture::from_path(Path::new("pic/daram.jpg")).unwrap(),
             fuel_accumulation_max: 0.0,
             fuel_accumulation_now: 0.0,
@@ -45,10 +46,8 @@ impl Runner {
         }
     }
 
-    pub fn render(&mut self, c: Context, gl: &mut GlGraphics) {
-        let initial_render_info = [0.0, 0.0, self.render_info[2], self.render_info[3]];
-        let image = Image::new().rect(initial_render_info);
-        image.draw(&self.texture, default_draw_state(), c.transform.trans(self.render_info[0], self.render_info[1]), gl);
+    pub fn render(&self, c: Context, gl: &mut GlGraphics) {
+        self.render_info.render(c, gl, &self.texture);
     } 
 
     pub fn initiate_jump(&mut self) {
@@ -84,8 +83,7 @@ impl Runner {
         let dt_x: f64 = move_distance * self.accel_direction;
         let dt_y: f64 = self.y_speed * dt;
 
-        self.render_info[0] += dt_x;
-        self.render_info[1] += dt_y;
+        self.render_info.mod_xy(dt_x, dt_y);
 
         if self.jump_count > 0 {
             self.y_speed += CONTEXT.gravity_accel * dt;
@@ -95,14 +93,9 @@ impl Runner {
         let limit_max_x = (WINDOW_SIZE[0] as f64) - 1.5*CONTEXT.runner_width;
         let limit_max_y = CONTEXT.runner_y_offset;
         
-        if self.render_info[0] < limit_min_x {
-            self.render_info[0] = limit_min_x;
-        } else if self.render_info[0] > limit_max_x {
-            self.render_info[0] = limit_max_x;
-        }
+        self.render_info.limit_x(Some(limit_min_x), Some(limit_max_x));
 
-        if self.render_info[1] > limit_max_y {
-            self.render_info[1] = limit_max_y;
+        if self.render_info.limit_y(None, Some(limit_max_y)) {
             self.y_speed = 0.0;
             self.jump_count = 0;
         }
@@ -112,8 +105,8 @@ impl Runner {
 
     }
 
-    pub fn get_render_info(&self) -> [f64; 4] {
-        self.render_info
+    pub fn get_render_info(&self) -> &RenderInfo {
+        &self.render_info
     }
 }
 

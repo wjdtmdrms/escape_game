@@ -3,6 +3,7 @@ use graphics::*;
 use rand::{ Rng, thread_rng };
 use std::path::Path;
 use game::configure::CONTEXT;
+use game::render_info::RenderInfo;
 
 // Ground
 enum GroundPattern {
@@ -43,7 +44,7 @@ fn get_type(dice: i32) -> GroundType {
 }
 
 pub struct Ground {
-    render_info: [f64; 4],
+    render_info: RenderInfo,
     g_type: GroundType,
     texture: Texture,
 }
@@ -54,7 +55,7 @@ impl Ground {
 
         let ground_type = get_type(dice);
 
-        let initial_render_info: [f64; 4] = [offset, 648.0, CONTEXT.land_width, 72.0];
+        let initial_render_info: RenderInfo = RenderInfo::new([offset, 648.0, CONTEXT.land_width, 72.0]);
         let img_texture = ground_type.get_texture();
         Ground {
             render_info: initial_render_info,
@@ -63,28 +64,20 @@ impl Ground {
         }
     }
 
-    pub fn mod_xy(&mut self, dt_x: f64, dt_y: f64) {
-        self.render_info[0] += dt_x;
-        self.render_info[1] += dt_y;
-    }
-
     pub fn render(&self, c: Context, gl: &mut GlGraphics) {
-        let initial_render_info = [0.0, 0.0, self.render_info[2], self.render_info[3]];
-        let image = Image::new().rect(initial_render_info);
-        image.draw(&self.texture, default_draw_state(), c.transform.trans(self.render_info[0], self.render_info[1]), gl);
+        self.render_info.render(c, gl, &self.texture);
     }
 
-    pub fn need_to_remove(&self) -> bool
-    {
-        self.render_info[2] < -1.0 * self.render_info[0]
+    pub fn need_to_remove(&self) -> bool {
+        self.render_info.is_hidden_x()
     }
 
     pub fn animate(&mut self, move_distance: f64) {
-        self.render_info[0] -= move_distance;
+        self.render_info.mod_xy(-move_distance, 0.0);
     }
 
     pub fn get_offset_x(&self) -> f64 {
-        self.render_info[0]
+        self.render_info.get_offset_x()
     }
 }
 

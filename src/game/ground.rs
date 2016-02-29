@@ -1,7 +1,7 @@
 use opengl_graphics::{ GlGraphics };
 use graphics::*;
 use rand::{ Rng, thread_rng };
-use game::configure::CONTEXT;
+use game::configure::{ CONTEXT, WINDOW_SIZE };
 use game::render_info::RenderInfo;
 
 // Ground
@@ -53,7 +53,7 @@ impl Ground {
 
         let ground_type = get_type(dice);
 
-        let initial_render_info: RenderInfo = RenderInfo::new([offset, CONTEXT.land_init_y, CONTEXT.land_width, CONTEXT.land_height], ground_type.get_texture());
+        let initial_render_info: RenderInfo = RenderInfo::new([offset, WINDOW_SIZE[1] as f64 - CONTEXT.land_height, CONTEXT.land_width, CONTEXT.land_height], ground_type.get_texture());
         Ground {
             render_info: initial_render_info,
             g_type: ground_type,

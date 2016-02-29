@@ -3,7 +3,6 @@ pub struct Context {
     pub gravity_accel: f64,
 
     // ground config
-    pub land_init_y: f64,
     pub land_width: f64,
     pub land_height: f64,
 
@@ -25,7 +24,6 @@ pub static CONTEXT: Context = Context {
     gravity_accel: 2500.0,
 
     // ground config
-    land_init_y: 648.0,
     land_width: 128.0,
     land_height: 72.0,
 
@@ -38,7 +36,7 @@ pub static CONTEXT: Context = Context {
     runner_width: 157.0,
     runner_height: 183.0,
     runner_init_x: 144.0,
-    runner_init_y: 465.0,
+    runner_init_y: 464.0,
     runner_jump_speed: -1000.0,
 };
 

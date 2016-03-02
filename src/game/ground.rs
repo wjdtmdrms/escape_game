@@ -26,9 +26,9 @@ impl GroundType {
 
     fn get_texture(&self) -> &str {
         match *self {
-            GroundType::Normal  => "pic/ground.jpg",
-            GroundType::Trap    => "pic/trap.jpg",
-            GroundType::Pit     => "pic/pit.jpg",
+            GroundType::Normal  => "pic/ground.gif",
+            GroundType::Trap    => "pic/trap.gif",
+            GroundType::Pit     => "pic/pit.gif",
         }
     }
 }

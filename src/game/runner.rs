@@ -28,7 +28,7 @@ pub struct Runner {
 impl Runner {
     pub fn new() -> Runner {
         Runner {
-            render_info: RenderInfo::new([CONTEXT.runner_init_x, CONTEXT.runner_init_y, CONTEXT.runner_width, CONTEXT.runner_height], "pic/daram.jpg"),
+            render_info: RenderInfo::new([CONTEXT.runner_init_x, CONTEXT.runner_init_y, CONTEXT.runner_width, CONTEXT.runner_height], "pic/daram.gif"),
             fuel_accumulation_max: 0.0,
             fuel_accumulation_now: 0.0,
             fuel_consumption: 0.0,
@@ -50,7 +50,11 @@ impl Runner {
     pub fn initiate_jump(&mut self) {
         if self.jump_count < CONTEXT.max_jump_cnt {
             self.jump_count += 1;
-            self.y_speed = CONTEXT.runner_jump_speed;
+            if self.jump_count == 1 {
+                self.y_speed = CONTEXT.runner_jump_speed_1;
+            } else {
+                self.y_speed = CONTEXT.runner_jump_speed_2;
+            }
         }
     }
 
@@ -88,6 +92,7 @@ impl Runner {
 
         let limit_min_x = 0.0;
         let limit_max_x = (WINDOW_SIZE[0] as f64) - 1.5*CONTEXT.runner_width;
+        let limit_min_y = 0.0;
         let limit_max_y = CONTEXT.runner_init_y;
 
         self.render_info.limit_x(Some(limit_min_x), Some(limit_max_x));
@@ -95,7 +100,9 @@ impl Runner {
         if self.render_info.limit_y(None, Some(limit_max_y)) {
             self.y_speed = 0.0;
             self.jump_count = 0;
-        }
+        }/* else { 
+            self.render_info.limit_y(Some(limit_min_y), None);
+        }*/
     }
 
     fn lie_down(&self) {

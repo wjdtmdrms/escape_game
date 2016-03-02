@@ -14,9 +14,9 @@ enum ObjectType {
 impl ObjectType {
     fn get_texture(&self) -> &str {
         match *self {
-            ObjectType::Ore         => "pic/ore.jpg",
-            ObjectType::Asteroid    => "pic/asteroid.jpg",
-            ObjectType::Star        => "pic/star.jpg",
+            ObjectType::Ore         => "pic/ore.gif",
+            ObjectType::Asteroid    => "pic/asteroid.gif",
+            ObjectType::Star        => "pic/star.gif",
         }
     }
 }

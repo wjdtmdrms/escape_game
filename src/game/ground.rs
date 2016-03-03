@@ -4,13 +4,12 @@ use rand::{ Rng, thread_rng };
 use game::configure::{ CONTEXT, WINDOW_SIZE };
 use game::render_info::RenderInfo;
 
-// Ground
-enum GroundPattern {
-
-}
+//Ground
 
 enum GroundType {
     Normal,
+    NarrowWall,
+    WideWall,
     Trap,
     Pit,
 }
@@ -18,9 +17,20 @@ enum GroundType {
 impl GroundType {
     fn get_height(&self) -> f64 {
         match *self {
-            GroundType::Normal  => 72.0,
-            GroundType::Trap    => 72.0,
-            GroundType::Pit     => 72.0,
+            //GroundType::Normal    => CONTEXT.ground_height,
+            GroundType::NarrowWall  => CONTEXT.ground_height * 3.0,
+            GroundType::WideWall    => CONTEXT.ground_height * 3.0,
+            _                       => CONTEXT.ground_height,
+            //GroundType::Trap      => CONTEXT.ground_height,
+            //GroundType::Pit       => CONTEXT.ground_height,
+        }
+    }
+
+    fn get_width(&self) -> f64 {
+        match *self {
+            GroundType::NarrowWall  => CONTEXT.ground_width * 0.5,
+            GroundType::WideWall    => CONTEXT.ground_width * 1.5,
+            _                       => CONTEXT.ground_width,
         }
     }
 
@@ -29,15 +39,18 @@ impl GroundType {
             GroundType::Normal  => "pic/ground.gif",
             GroundType::Trap    => "pic/trap.gif",
             GroundType::Pit     => "pic/pit.gif",
+            _ => "pic/ground.gif",
         }
     }
 }
 
 fn get_type(dice: i32) -> GroundType {
     match dice {
-        0...16  => GroundType::Normal,
-        17...18 => GroundType::Trap,
-        19      => GroundType::Pit,
+        0...14  => GroundType::Normal,
+        15...16 => GroundType::Trap,
+        17      => GroundType::Pit,
+        18      => GroundType::NarrowWall,
+        19      => GroundType::WideWall,
         _       => GroundType::Normal,
     }
 }
@@ -52,8 +65,10 @@ impl Ground {
         let dice: i32 = thread_rng().gen_range(0, 20);
 
         let ground_type = get_type(dice);
+        let ground_height = ground_type.get_height();
+        let ground_width = ground_type.get_width();
 
-        let initial_render_info: RenderInfo = RenderInfo::new([offset, WINDOW_SIZE[1] as f64 - CONTEXT.land_height, CONTEXT.land_width, CONTEXT.land_height], ground_type.get_texture());
+        let initial_render_info: RenderInfo = RenderInfo::new([offset, WINDOW_SIZE[1] as f64 - ground_height, ground_width, ground_height], ground_type.get_texture());
         Ground {
             render_info: initial_render_info,
             g_type: ground_type,
@@ -74,6 +89,14 @@ impl Ground {
 
     pub fn get_offset_x(&self) -> f64 {
         self.render_info.get_offset_x()
+    }
+
+    pub fn get_width(&self) -> f64 {
+        self.render_info.get_width()
+    }
+
+    pub fn get_height(&self) -> f64 {
+        self.render_info.get_height()
     }
 }
 

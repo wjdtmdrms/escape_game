@@ -3,8 +3,8 @@ pub struct Context {
     pub gravity_accel: f64,
 
     // ground config
-    pub land_width: f64,
-    pub land_height: f64,
+    pub ground_width: f64,
+    pub ground_height: f64,
 
     // object config 
     pub object_width: f64,
@@ -21,12 +21,13 @@ pub struct Context {
 }
 
 pub static CONTEXT: Context = Context {
+    
     // global config
     gravity_accel: 5000.0,
 
     // ground config
-    land_width: 128.0,
-    land_height: 72.0,
+    ground_width: 128.0,
+    ground_height: 72.0,
 
     // object config 
     object_width: 50.0,

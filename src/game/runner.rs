@@ -8,14 +8,12 @@ pub struct Runner {
     render_info: RenderInfo,
 
     // TODO: comment this
-    fuel_accumulation_max: f64,
-    fuel_accumulation_now: f64,
+    fuel_capacity_max: f64,
+    fuel_capacity_now: f64,
     fuel_consumption: f64,
     // TODO: comment this
     suit_durability_max: f64,
     suit_durability_now: f64,
-    // TODO: comment this
-    fusionable_material: f64,
 
     jump_count: i32,
     y_speed: f64, 

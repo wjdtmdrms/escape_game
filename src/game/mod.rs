@@ -39,7 +39,7 @@ impl Game {
             object_q: vec![],
             does_spacekey_released: true,
         }
-    }
+   }
 
     pub fn render(&mut self, args: &RenderArgs) {
         let tmp_ground_q = &self.ground_q;
@@ -70,13 +70,14 @@ impl Game {
         // get offset tiles
         let mut offset: f64 = 0.0;
         if let Some(gr) = self.ground_q.last() {
-            offset = gr.get_offset_x() + CONTEXT.land_width;
+            offset = gr.get_offset_x() + gr.get_width();
         }
 
         // add new grounds
         while offset < WINDOW_SIZE[0] as f64 {
-            self.ground_q.push(Ground::new(offset));
-            offset += CONTEXT.land_width;
+            let tmp_g = Ground::new(offset);
+            offset += tmp_g.get_width();
+            self.ground_q.push(tmp_g);
         }
     }
 

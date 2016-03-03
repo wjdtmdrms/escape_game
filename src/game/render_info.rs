@@ -46,6 +46,14 @@ impl RenderInfo {
         self.render_info[1]
     }
 
+    pub fn get_width(&self) -> f64 {
+        self.render_info[2]
+    }
+
+    pub fn get_height(&self) -> f64 {
+        self.render_info[3]
+    }
+
     pub fn is_hidden_x(&self) -> bool {
         self.render_info[0] + self.render_info[2] < 0.0
     }

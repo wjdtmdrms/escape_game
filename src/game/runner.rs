@@ -27,12 +27,11 @@ impl Runner {
     pub fn new() -> Runner {
         Runner {
             render_info: RenderInfo::new([CONTEXT.runner_init_x, CONTEXT.runner_init_y, CONTEXT.runner_width, CONTEXT.runner_height], "pic/daram.gif"),
-            fuel_accumulation_max: 0.0,
-            fuel_accumulation_now: 0.0,
+            fuel_capacity_max: 0.0,
+            fuel_capacity_now: 0.0,
             fuel_consumption: 0.0,
             suit_durability_max: 0.0,
             suit_durability_now: 0.0,
-            fusionable_material: 0.0,
             jump_count: 0,
             y_speed: 0.0,
             lie_down_seq: 0,
